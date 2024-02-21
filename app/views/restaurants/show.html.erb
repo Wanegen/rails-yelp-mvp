@@ -1,0 +1,28 @@
+<div class="d-flex flex-column align-items-center mt-5">
+  <h1 class="mb-5"><%= @restaurant.name %></h1>
+
+  <h5>Food category :</h5>
+  <h3 class="mb-5"><%= @restaurant.category %></h3>
+  <h5>Our address :</h5>
+  <h3 class="mb-5"><%= @restaurant.address %></h3>
+  <h5>Our phone number :</h5>
+  <h3 class="mb-5"><%= @restaurant.phone_number %></h3>
+
+  <h5>Our reviews :</h5>
+  <ul class="list-group mb-3">
+    <% @restaurant.reviews.each do |review| %>
+      <li class="list-group-item space-between">
+      "<%= review.content %>" - Rated <strong>
+      <%= review.rating %>/5</strong>"
+      <%= link_to "Edit",
+      edit_restaurant_review_path(review)%>
+      <%= link_to "Delete",
+      review_path(review),
+      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
+      </li>
+    <% end %>
+  </ul>
+  <%= link_to "Give us a review !", new_restaurant_review_path(@restaurant), class:"btn btn-success mb-3" %>
+  <%= link_to "Back to restaurants", restaurants_path, class:"btn btn-primary mt-4" %>
+
+</div>
